@@ -218,7 +218,7 @@ def main():
                 subtask_config.subtask_term_signal for subtask_config in eef_subtask_configs
             ]
             # no need to annotate the last subtask term signal, so remove it from the list
-            subtask_term_signal_names[eef_name].pop()
+            # subtask_term_signal_names[eef_name].pop()
 
     # reset environment
     env.reset()

@@ -65,7 +65,7 @@ import torch
 import omni
 
 from isaaclab.envs import ManagerBasedRLMimicEnv
-
+from isaaclab.utils.datasets import EpisodeData, HDF5DatasetFileHandler
 import isaaclab_mimic.envs  # noqa: F401
 
 if args_cli.enable_pinocchio:
@@ -117,6 +117,17 @@ def main():
     # reset before starting
     env.reset()
 
+    dataset_file_handler = HDF5DatasetFileHandler()
+    dataset_file_handler.open(args_cli.input_file,)
+    episode_names = list(dataset_file_handler.get_episode_names())
+    episode_data = dataset_file_handler.load_episode(
+        episode_names[0], env.device
+    )
+    # Set initial state for the episode
+    # env.sim.reset()
+    initial_state = episode_data.get_initial_state()
+    # initial_state = initial_state['rigid_object']
+    # initial_state["rigid_object"].pop("tvcontrol", None)
     # Setup and run async data generation
     async_components = setup_async_generation(
         env=env,
@@ -134,6 +145,7 @@ def main():
             async_components["action_queue"],
             async_components["info_pool"],
             async_components["event_loop"],
+            state=initial_state,
         )
     except asyncio.CancelledError:
         print("Tasks were cancelled.")

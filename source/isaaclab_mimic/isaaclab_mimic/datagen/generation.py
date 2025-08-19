@@ -65,6 +65,7 @@ def env_loop(
     env_action_queue: asyncio.Queue,
     shared_datagen_info_pool: DataGenInfoPool,
     asyncio_event_loop: asyncio.AbstractEventLoop,
+    state: dict[str, dict[str, dict[str, torch.Tensor]]],
 ):
     """Main asyncio loop for the environment.
 
@@ -87,7 +88,9 @@ def env_loop(
                 asyncio_event_loop.run_until_complete(asyncio.sleep(0))
                 while not env_reset_queue.empty():
                     env_id_tensor[0] = env_reset_queue.get_nowait()
-                    env.reset(env_ids=env_id_tensor)
+                    # env.sim.reset()
+                    env.reset_to_init(state, torch.tensor([env_id_tensor], device=env.device), is_relative=True)
+                    # env.reset(env_ids=env_id_tensor)
                     env_reset_queue.task_done()
 
             actions = torch.zeros(env.action_space.shape)

@@ -14,7 +14,7 @@ from isaaclab.app import AppLauncher
 # add argparse arguments
 parser = argparse.ArgumentParser(description="Replay demonstrations in Isaac Lab environments.")
 parser.add_argument("--num_envs", type=int, default=1, help="Number of environments to replay episodes.")
-parser.add_argument("--task", type=str, default=None, help="Force to use the specified task.")
+parser.add_argument("--task", type=str, default="Isaac-Pick-TVControl-FR5-IK-Rel-v0", help="Force to use the specified task.")
 parser.add_argument(
     "--select_episodes",
     type=int,
@@ -22,7 +22,7 @@ parser.add_argument(
     default=[],
     help="A list of episode indices to be replayed. Keep empty to replay all in the dataset file.",
 )
-parser.add_argument("--dataset_file", type=str, default="datasets/dataset.hdf5", help="Dataset file to be replayed.")
+parser.add_argument("--dataset_file", type=str, default="./datasets/datasets_fr7.hdf5", help="Dataset file to be replayed.")
 parser.add_argument(
     "--validate_states",
     action="store_true",
@@ -155,7 +155,7 @@ def main():
     print('Press "B" to pause and "N" to resume the replayed actions.')
 
     # Determine if state validation should be conducted
-    state_validation_enabled = False
+    state_validation_enabled = True
     if args_cli.validate_states and num_envs == 1:
         state_validation_enabled = True
     elif args_cli.validate_states and num_envs > 1:
@@ -201,8 +201,9 @@ def main():
                             )
                             env_episode_data_map[env_id] = episode_data
                             # Set initial state for the new episode
+                            # env.sim.reset()
                             initial_state = episode_data.get_initial_state()
-                            env.reset_to(initial_state, torch.tensor([env_id], device=env.device), is_relative=True)
+                            env.reset_to(initial_state, torch.tensor([env_id], device=env.device), seed=1, is_relative=True)
                             # Get the first action for the new episode
                             env_next_action = env_episode_data_map[env_id].get_next_action()
                             has_next_action = True

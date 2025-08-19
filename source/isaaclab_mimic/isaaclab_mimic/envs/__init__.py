@@ -14,6 +14,10 @@ from .franka_stack_ik_rel_mimic_env import FrankaCubeStackIKRelMimicEnv
 from .franka_stack_ik_rel_mimic_env_cfg import FrankaCubeStackIKRelMimicEnvCfg
 from .franka_stack_ik_rel_visuomotor_cosmos_mimic_env_cfg import FrankaCubeStackIKRelVisuomotorCosmosMimicEnvCfg
 from .franka_stack_ik_rel_visuomotor_mimic_env_cfg import FrankaCubeStackIKRelVisuomotorMimicEnvCfg
+from .fr5_pick_ik_rel_visuomotor_mimic_env_cfg import FR5CubePickIKRelVisuomotorMimicEnvCfg
+from .fr5_pick_ik_rel_mimic_env import FR5CubePickIKRelMimicEnv
+from .fr5_pick_TVControl_ik_rel_visuomotor_mimic_env_cfg import FR5TVControlPickIKRelVisuomotorMimicEnvCfg
+from .fr5_pick_TVControl_ik_rel_mimic_env import FR5TVControlPickIKRelMimicEnv
 
 ##
 # Inverse Kinematics - Relative Pose Control
@@ -62,6 +66,35 @@ gym.register(
         "env_cfg_entry_point": (
             franka_stack_ik_rel_visuomotor_cosmos_mimic_env_cfg.FrankaCubeStackIKRelVisuomotorCosmosMimicEnvCfg
         ),
+    },
+    disable_env_checker=True,
+)
+
+gym.register(
+    id="Isaac-Stack-Cube-Franka-IK-Rel-Visuomotor-Cosmos-Mimic-v0",
+    entry_point="isaaclab_mimic.envs:FrankaCubeStackIKRelMimicEnv",
+    kwargs={
+        "env_cfg_entry_point": (
+            franka_stack_ik_rel_visuomotor_cosmos_mimic_env_cfg.FrankaCubeStackIKRelVisuomotorCosmosMimicEnvCfg
+        ),
+    },
+    disable_env_checker=True,
+)
+
+gym.register(
+    id="Isaac-Pick-Cube-FR5-IK-Rel-Visuomotor-Mimic-v0",
+    entry_point="isaaclab_mimic.envs:FR5CubePickIKRelMimicEnv",
+    kwargs={
+        "env_cfg_entry_point": fr5_pick_ik_rel_visuomotor_mimic_env_cfg.FR5CubePickIKRelVisuomotorMimicEnvCfg,
+    },
+    disable_env_checker=True,
+)
+
+gym.register(
+    id="Isaac-Pick-TVControl-FR5-IK-Rel-Visuomotor-Mimic-v0",
+    entry_point="isaaclab_mimic.envs:FR5TVControlPickIKRelMimicEnv",
+    kwargs={
+        "env_cfg_entry_point": fr5_pick_TVControl_ik_rel_visuomotor_mimic_env_cfg.FR5TVControlPickIKRelVisuomotorMimicEnvCfg,
     },
     disable_env_checker=True,
 )

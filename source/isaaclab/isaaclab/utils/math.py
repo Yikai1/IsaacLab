@@ -14,7 +14,7 @@ import torch
 import torch.nn.functional
 from typing import Literal
 
-import omni.log
+# import omni.log
 
 """
 General

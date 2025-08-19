@@ -5,7 +5,7 @@
 
 import isaaclab.sim as sim_utils
 from isaaclab.markers.visualization_markers import VisualizationMarkersCfg
-from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR
+from isaaclab.utils.assets import ISAAC_NUCLEUS_DIR, ISAAC_LOCAL_DIR
 
 ##
 # Sensors.
@@ -55,7 +55,7 @@ DEFORMABLE_TARGET_MARKER_CFG = VisualizationMarkersCfg(
 FRAME_MARKER_CFG = VisualizationMarkersCfg(
     markers={
         "frame": sim_utils.UsdFileCfg(
-            usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/UIElements/frame_prim.usd",
+            usd_path=f"{ISAAC_LOCAL_DIR}/Props/UIElements/frame_prim.usd",
             scale=(0.5, 0.5, 0.5),
         ),
         "connecting_line": sim_utils.CylinderCfg(
@@ -71,7 +71,7 @@ FRAME_MARKER_CFG = VisualizationMarkersCfg(
 RED_ARROW_X_MARKER_CFG = VisualizationMarkersCfg(
     markers={
         "arrow": sim_utils.UsdFileCfg(
-            usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/UIElements/arrow_x.usd",
+            usd_path=f"{ISAAC_LOCAL_DIR}/Props/UIElements/arrow_x.usd",
             scale=(1.0, 0.1, 0.1),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(1.0, 0.0, 0.0)),
         )
@@ -83,7 +83,7 @@ RED_ARROW_X_MARKER_CFG = VisualizationMarkersCfg(
 BLUE_ARROW_X_MARKER_CFG = VisualizationMarkersCfg(
     markers={
         "arrow": sim_utils.UsdFileCfg(
-            usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/UIElements/arrow_x.usd",
+            usd_path=f"{ISAAC_LOCAL_DIR}/Props/UIElements/arrow_x.usd",
             scale=(1.0, 0.1, 0.1),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 0.0, 1.0)),
         )
@@ -94,7 +94,7 @@ BLUE_ARROW_X_MARKER_CFG = VisualizationMarkersCfg(
 GREEN_ARROW_X_MARKER_CFG = VisualizationMarkersCfg(
     markers={
         "arrow": sim_utils.UsdFileCfg(
-            usd_path=f"{ISAAC_NUCLEUS_DIR}/Props/UIElements/arrow_x.usd",
+            usd_path=f"{ISAAC_LOCAL_DIR}/Props/UIElements/arrow_x.usd",
             scale=(1.0, 0.1, 0.1),
             visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(0.0, 1.0, 0.0)),
         )

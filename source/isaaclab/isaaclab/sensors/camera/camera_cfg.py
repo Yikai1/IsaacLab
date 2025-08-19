@@ -26,7 +26,7 @@ class CameraCfg(SensorBaseCfg):
 
         rot: tuple[float, float, float, float] = (1.0, 0.0, 0.0, 0.0)
         """Quaternion rotation (w, x, y, z) w.r.t. the parent frame. Defaults to (1.0, 0.0, 0.0, 0.0)."""
-
+        """(x,z,w,y)?"""
         convention: Literal["opengl", "ros", "world"] = "ros"
         """The convention in which the frame offset is applied. Defaults to "ros".
 

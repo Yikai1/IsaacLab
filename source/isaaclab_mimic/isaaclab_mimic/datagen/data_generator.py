@@ -161,6 +161,8 @@ class DataGenerator:
 
         # sanity check on task spec offset ranges - final subtask should not have any offset randomization
         for subtask_configs in self.env_cfg.subtask_configs.values():
+            # print(subtask_configs)
+            # print(subtask_configs[-1])
             assert subtask_configs[-1].subtask_term_offset_range[0] == 0
             assert subtask_configs[-1].subtask_term_offset_range[1] == 0
 
@@ -584,6 +586,10 @@ class DataGenerator:
         # reset the env to create a new task demo instance
         env_id_tensor = torch.tensor([env_id], dtype=torch.int64, device=self.env.device)
         self.env.recorder_manager.reset(env_ids=env_id_tensor)
+        ## step simulator for 20 steps to make the scene stable, wait for object falling down to the table
+        # for i in range(20):
+        #     await env_action_queue.put(env_id_tensor, init_action)
+        #     await env_action_queue.join()
         await env_reset_queue.put(env_id)
         await env_reset_queue.join()
         new_initial_state = self.env.scene.get_state(is_relative=True)
